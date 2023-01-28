@@ -1,324 +1,318 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="windows-1251">
-    <style>
-      * {padding:0; margin:0;}
-      body {padding:10px;}
-    </style>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		body {
+			padding: 10px;
+		}
+	</style>
 </head>
+
 <body>
-    <div id="result">
-      <p style="margin:10px 0">Конвертер файлов Меркурий HTML в XML 80020</p>
-      <div style="display:flex">
-        <input type="text" id="indate" placeholder="01.02.21">
-        <p>Дата в формате DD.MM.YY</p>
-      </div>
+	<div id="result">
+		<p style="margin:10px 0">РљРѕРЅРІРµСЂС‚РµСЂ С„Р°Р№Р»РѕРІ РњРµСЂРєСѓСЂРёР№ HTML РІ XML 80020</p>
+		<div style="display:flex">
+			<input type="text" id="indate" placeholder="01.02.21">
+			<p>Р”Р°С‚Р° РІ С„РѕСЂРјР°С‚Рµ DD.MM.YY</p>
+		</div>
 
-      <div style="display:flex">
-        <input type="text" id="inmeascode" placeholder="1234567890123">
-        <p>Код точки измерения XXXXXXXXXXXXX</p>
-      </div>
-      <div style="display:flex">
-        <input type="text" id="inmeasname" placeholder="яч.2">
-        <p>Имя точки измерения</p>
-      </div>
+		<div style="display:flex">
+			<input type="text" id="inmeascode" placeholder="1234567890123">
+			<p>РљРѕРґ С‚РѕС‡РєРё РёР·РјРµСЂРµРЅРёСЏ XXXXXXXXXXXXX</p>
+		</div>
+		<div style="display:flex">
+			<input type="text" id="inmeasname" placeholder="СЏС‡.2">
+			<p>РРјСЏ С‚РѕС‡РєРё РёР·РјРµСЂРµРЅРёСЏ</p>
+		</div>
 
-      <div style="display:flex">
-        <input type="text" id="inareainn" placeholder="0000000001">
-        <p>ИНН сечения</p>
-      </div>
-      <div style="display:flex">
-        <input type="text" id="inareaname" placeholder="XML 80020">
-        <p>Название сечения</p>
-      </div>
+		<div style="display:flex">
+			<input type="text" id="inareainn" placeholder="0000000001">
+			<p>РРќРќ СЃРµС‡РµРЅРёСЏ</p>
+		</div>
+		<div style="display:flex">
+			<input type="text" id="inareaname" placeholder="XML 80020">
+			<p>РќР°Р·РІР°РЅРёРµ СЃРµС‡РµРЅРёСЏ</p>
+		</div>
 
-      <div style="display:flex">
-        <input type="text" id="insenderinn" placeholder="5036065113">
-        <p>ИНН отправителя</p>
-      </div>
-      <div style="display:flex">
-        <input type="text" id="insendername" placeholder="ПАО Россети Московский регион">
-        <p>Наименование отправителя</p>
-      </div>
+		<div style="display:flex">
+			<input type="text" id="insenderinn" placeholder="5036065113">
+			<p>РРќРќ РѕС‚РїСЂР°РІРёС‚РµР»СЏ</p>
+		</div>
+		<div style="display:flex">
+			<input type="text" id="insendername" placeholder="РџРђРћ Р РѕСЃСЃРµС‚Рё РњРѕСЃРєРѕРІСЃРєРёР№ СЂРµРіРёРѕРЅ">
+			<p>РќР°РёРјРµРЅРѕРІР°РЅРёРµ РѕС‚РїСЂР°РІРёС‚РµР»СЏ</p>
+		</div>
 
-      <div style="display:flex">
-        <input type="text" id="inmessnumber" placeholder="1">
-        <p>Номер сообщения</p>
-      </div>
-    </div>
-
-
-<script>
-
-document.body.insertAdjacentHTML('beforeend', '<input type="file" id="infile">');
-var file;
-var arr=[];
-const inFile = document.querySelector('#infile');
+		<div style="display:flex">
+			<input type="text" id="inmessnumber" placeholder="1">
+			<p>РќРѕРјРµСЂ СЃРѕРѕР±С‰РµРЅРёСЏ</p>
+		</div>
+	</div>
 
 
-const inDate = document.querySelector('#indate');		// дата <day>, <timestamp>
+	<script>
 
-const inMeasCode = document.querySelector('#inmeascode');
+		document.body.insertAdjacentHTML('beforeend', '<input type="file" id="infile">');
+		var file;
+		var arr = [];
+		const inFile = document.querySelector('#infile');
 
-	// код точки измерения <measuringpoint code>
-const inMeasName = document.querySelector('#inmeasname');
 
-	// имя точки измерения <measuringpoint name>
+		const inDate = document.querySelector('#indate');			// РґР°С‚Р° <day>, <timestamp>
 
-const inAreaINN = document.querySelector('#inareainn');
+		const inMeasCode = document.querySelector('#inmeascode');	// РєРѕРґ С‚РѕС‡РєРё РёР·РјРµСЂРµРЅРёСЏ <measuringpoint code>
+		const inMeasName = document.querySelector('#inmeasname');	// РёРјСЏ С‚РѕС‡РєРё РёР·РјРµСЂРµРЅРёСЏ <measuringpoint name>
 
-		// ИНН сечения <area inn>
-const inAreaName = document.querySelector('#inareaname');
+		const inAreaINN = document.querySelector('#inareainn');		// РРќРќ СЃРµС‡РµРЅРёСЏ <area inn>
+		const inAreaName = document.querySelector('#inareaname');	// РЅР°Р·РІР°РЅРёРµ СЃРµС‡РµРЅРёСЏ <area name>
 
-	// название сечения <area name>
+		const inSenderINN = document.querySelector('#insenderinn');		// РРќРќ РѕС‚РїСЂР°РІРёС‚РµР»СЏ <sender inn>
+		const inSenderName = document.querySelector('#insendername');	// РЅР°РёРјРµРЅРѕРІР°РЅРёРµ РѕС‚РїСЂР°РІРёС‚РµР»СЏ <sender name>
 
-const inSenderINN = document.querySelector('#insenderinn');
+		const inMessNumber = document.querySelector('#inmessnumber');	// РЅРѕРјРµСЂ СЃРѕРѕР±С‰РµРЅРёСЏ <message number>
 
-	// ИНН отправителя <sender inn>
-const inSenderName = document.querySelector('#insendername');
+		// РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРѕР±С‹С‚РёСЏ РІС‹Р±РѕСЂР° С„Р°Р№Р»Р° РІ input
+		inFile.addEventListener('change', function () {
+			file = inFile.files[0];
+			handleFile(file);
+		});
 
-	// наименование отправителя <sender name>
+		// РѕР±СЂР°Р±РѕС‚РєР° С„Р°Р№Р»Р° (1)
+		// РёСЃРїРѕР»СЊР·СѓРµС‚ handleResult
+		function handleFile(f) {
+			if (file.type === 'text/html') {
 
-const inMessNumber = document.querySelector('#inmessnumber');
+				const reader = new FileReader();
+				reader.readAsText(f, 'windows-1251');
+				reader.onload = function () { handleResult(reader.result); };
+			} else { alert('Choose file HTML') }
 
-	// номер сообщения <message number>
+		}
 
-// обработчик события выбора файла в input
-inFile.addEventListener('change', function () {
-	file = inFile.files[0];
-	handleFile(file);
-});
-
-// обработка файла (1)
-// использует handleResult
-function handleFile(f) {
-	if (file.type === 'text/html') {
-
-		const reader = new FileReader();
-		reader.readAsText(f, 'windows-1251');
-		reader.onload = function () { handleResult(reader.result); };
-	} else {alert('Choose file HTML')}
-
-}
-
-// обработка содержимого текста (2) основная функция работы конвертера
-// использует getSubTagInner, getSubTag, tagToArrInner, sDateConv, toTextArea, presentExportFile
-function handleResult(s) {
-	let h1 = getSubTagInner(getSubTag(s, 'BODY'), 'H1');
-	let h2 = getSubTagInner(getSubTag(s, 'BODY'), 'H2');
-	let tbody = getSubTag(getSubTag(s, 'table'), 'TBODY');
-	let arrTr = tagToArrInner(tbody, 'tr');	
-	for (let i=0; i<arrTr.length; i++) { arr[i] = tagToArrInner(arrTr[i], 'td' );};
-	let senderInn = '5036065113';
-	let xmlDate, xmlMeasCode, xmlMeasName, xmlAreaINN, xmlAreaName, xmlSenderINN, xmlSenderName, xmlMessNumber;
-	if (inDate.value.toString()) {xmlDate = inDate.value.toString();}		// определяем дату
-	if (!inDate.value.toString()) {xmlDate = arr[0][6];}				// если дата не выставлена, используем первую дату в выгрузке
-	if (inMeasCode.value.toString()) {xmlMeasCode = inMeasCode.value.toString();}	// определяем код точки измерения
-	if (!inMeasCode.value.toString()) {xmlMeasCode = "0000000000000";}		// если код точки не выставлен, используем 0000000000000
-	if (inMeasName.value.toString()) {xmlMeasName = inMeasName.value.toString();}	// определяем имя точки измерения
-	if (!inMeasName.value.toString()) {xmlMeasName = "яч.2";}			// если имя точки не выставлено, используем яч.2
-	if (inAreaINN.value.toString()) {xmlAreaINN = inAreaINN.value.toString();}	// определяем ИНН сечения
-	if (!inAreaINN.value.toString()) {xmlAreaINN = "0000000001";}			// если ИНН сечения не выставлен, используем 0000000001
-	if (inAreaName.value.toString()) {xmlAreaName = inAreaName.value.toString();}	// определяем название сечения
-	if (!inAreaName.value.toString()) {xmlAreaName = "XML 80020";}			// если название сечения не выставлено, используем XML 80020
-	if (inSenderINN.value.toString()) {xmlSenderINN = inSenderINN.value.toString();}	// определяем ИНН отправителя
-	if (!inSenderINN.value.toString()) {xmlSenderINN = "5036065113";}			// если ИНН отправителя не выставлен, используем 5036065113
-	if (inSenderName.value.toString()) {xmlSenderName = inSenderName.value.toString();}	// определяем наименование отправителя
-	if (!inSenderName.value.toString()) {xmlSenderName = "ПАО Россети Московский регион";}	// если наименование отправителя не выставлено, используем ПАО Россети Московский регион
-	if (inMessNumber.value.toString()) {xmlMessNumber = inMessNumber.value.toString();}	// определяем номер сообщения
-	if (!inMessNumber.value.toString()) {xmlMessNumber = "1";}				// если номер сообщения не выставлен, используем 1
-	let prevTime, nextTime;
-	// формируем текст для вывода
-	let str80020 = 	'<?xml version="1.0" encoding="UTF-8"?>' + '\r\n' +
-			'<!--' + 'This file generated from XML converter by Denis Neryupov' + '-->' + '\r\n' +
-			'<!--' + h1.replace('<br>','') + '-->' + '\r\n' +
-			'<!--' + h2 + '-->' + '\r\n' +
-			'<message class="80020" version="2" number="' + xmlMessNumber + '">' + '\r\n' +
-  			'  <datetime>' + '\r\n' +
-			'    <timestamp>' + sDateConv(xmlDate).replace('.','').replace('.','') + '155405</timestamp>' + '\r\n' +
-			'    <daylightsavingtime>0</daylightsavingtime>' + '\r\n' +
-			'    <day>' + sDateConv(xmlDate).replace('.','').replace('.','') + '</day>' + '\r\n' +
-			'  </datetime>' + '\r\n' +
-			'  <sender>' + '\r\n' +
-			'    <name>' + xmlSenderName + '</name>' + '\r\n' +
-			'    <inn>' + xmlSenderINN + '</inn>' + '\r\n' +
-			'  </sender>' + '\r\n' +
-			'  <area timezone="1">' + '\r\n' +
-			'    <inn>' + xmlAreaINN + '</inn>' + '\r\n' +
-			'    <name>' + xmlAreaName + '</name>' + '\r\n' +
-			'    <measuringpoint code="' + xmlMeasCode + '" name="' + xmlMeasName + '">'+ '\r\n';
-	str80020 = str80020 + '      <measuringchannel code="01" desc="счетчик, акт. прием">' + '\r\n';
-	prevTime = '0000';
-	arr.forEach(function (el, i) {
-		if (el[6] === xmlDate) {
-			nextTime = el[5].replace(':', '');
-			str80020 = str80020 + '        <period start="' + prevTime + '" end="' + nextTime + '"><value>' + el[1] + '</value></period>' + '\r\n';
-			prevTime = el[5].replace(':', '');
-		};
-	});
-	str80020 = str80020 + '      </measuringchannel>' + '\r\n';
-	str80020 = str80020 + '      <measuringchannel code="02" desc="счетчик, акт. отдача">' + '\r\n';
-	prevTime = '0000';
-	arr.forEach(function (el, i) {
-		if (el[6] === xmlDate) {
-			nextTime = el[5].replace(':', '');
-			str80020 = str80020 + '        <period start="' + prevTime + '" end="' + nextTime + '"><value>' + el[2] + '</value></period>' + '\r\n';
-			prevTime = el[5].replace(':', '');
-		};
-	});
-	str80020 = str80020 + '      </measuringchannel>' + '\r\n';
-	str80020 = str80020 + '      <measuringchannel code="03" desc="счетчик, реакт. прием">' + '\r\n';
-	prevTime = '0000';
-	arr.forEach(function (el, i) {
-		if (el[6] === xmlDate) {
-			nextTime = el[5].replace(':', '');
-			str80020 = str80020 + '        <period start="' + prevTime + '" end="' + nextTime + '"><value>' + el[3] + '</value></period>' + '\r\n';
-			prevTime = el[5].replace(':', '');
-		};
-	});
-	str80020 = str80020 + '      </measuringchannel>' + '\r\n';
-	str80020 = str80020 + '      <measuringchannel code="04" desc="счетчик, реакт. отдача">' + '\r\n';
-	prevTime = '0000';
-	arr.forEach(function (el, i) {
-		if (el[6] === xmlDate) {
-			nextTime = el[5].replace(':', '');
-			str80020 = str80020 + '        <period start="' + prevTime + '" end="' + nextTime + '"><value>' + el[4] + '</value></period>' + '\r\n';
-			prevTime = el[5].replace(':', '');
-		};
-	});
-	str80020 = str80020 + '      </measuringchannel>' + '\r\n';
-	str80020 = str80020 + 	'    </measuringpoint>' + '\r\n' +
+		// РѕР±СЂР°Р±РѕС‚РєР° СЃРѕРґРµСЂР¶РёРјРѕРіРѕ С‚РµРєСЃС‚Р° (2) РѕСЃРЅРѕРІРЅР°СЏ С„СѓРЅРєС†РёСЏ СЂР°Р±РѕС‚С‹ РєРѕРЅРІРµСЂС‚РµСЂР°
+		// РёСЃРїРѕР»СЊР·СѓРµС‚ getSubTagInner, getSubTag, tagToArrInner, sDateConv, toTextArea, presentExportFile
+		function handleResult(s) {
+			let h1 = getSubTagInner(getSubTag(s, 'BODY'), 'H1');
+			let h2 = getSubTagInner(getSubTag(s, 'BODY'), 'H2');
+			let tbody = getSubTag(getSubTag(s, 'table'), 'TBODY');
+			let arrTr = tagToArrInner(tbody, 'tr');
+			for (let i = 0; i < arrTr.length; i++) { arr[i] = tagToArrInner(arrTr[i], 'td'); };
+			let senderInn = '5036065113';
+			let xmlDate, xmlMeasCode, xmlMeasName, xmlAreaINN, xmlAreaName, xmlSenderINN, xmlSenderName, xmlMessNumber;
+			if (inDate.value.toString()) { xmlDate = inDate.value.toString(); }		// РѕРїСЂРµРґРµР»СЏРµРј РґР°С‚Сѓ
+			if (!inDate.value.toString()) { xmlDate = arr[0][6]; }				// РµСЃР»Рё РґР°С‚Р° РЅРµ РІС‹СЃС‚Р°РІР»РµРЅР°, РёСЃРїРѕР»СЊР·СѓРµРј РїРµСЂРІСѓСЋ РґР°С‚Сѓ РІ РІС‹РіСЂСѓР·РєРµ
+			if (inMeasCode.value.toString()) { xmlMeasCode = inMeasCode.value.toString(); }	// РѕРїСЂРµРґРµР»СЏРµРј РєРѕРґ С‚РѕС‡РєРё РёР·РјРµСЂРµРЅРёСЏ
+			if (!inMeasCode.value.toString()) { xmlMeasCode = "0000000000000"; }		// РµСЃР»Рё РєРѕРґ С‚РѕС‡РєРё РЅРµ РІС‹СЃС‚Р°РІР»РµРЅ, РёСЃРїРѕР»СЊР·СѓРµРј 0000000000000
+			if (inMeasName.value.toString()) { xmlMeasName = inMeasName.value.toString(); }	// РѕРїСЂРµРґРµР»СЏРµРј РёРјСЏ С‚РѕС‡РєРё РёР·РјРµСЂРµРЅРёСЏ
+			if (!inMeasName.value.toString()) { xmlMeasName = "СЏС‡.2"; }			// РµСЃР»Рё РёРјСЏ С‚РѕС‡РєРё РЅРµ РІС‹СЃС‚Р°РІР»РµРЅРѕ, РёСЃРїРѕР»СЊР·СѓРµРј СЏС‡.2
+			if (inAreaINN.value.toString()) { xmlAreaINN = inAreaINN.value.toString(); }	// РѕРїСЂРµРґРµР»СЏРµРј РРќРќ СЃРµС‡РµРЅРёСЏ
+			if (!inAreaINN.value.toString()) { xmlAreaINN = "0000000001"; }			// РµСЃР»Рё РРќРќ СЃРµС‡РµРЅРёСЏ РЅРµ РІС‹СЃС‚Р°РІР»РµРЅ, РёСЃРїРѕР»СЊР·СѓРµРј 0000000001
+			if (inAreaName.value.toString()) { xmlAreaName = inAreaName.value.toString(); }	// РѕРїСЂРµРґРµР»СЏРµРј РЅР°Р·РІР°РЅРёРµ СЃРµС‡РµРЅРёСЏ
+			if (!inAreaName.value.toString()) { xmlAreaName = "XML 80020"; }			// РµСЃР»Рё РЅР°Р·РІР°РЅРёРµ СЃРµС‡РµРЅРёСЏ РЅРµ РІС‹СЃС‚Р°РІР»РµРЅРѕ, РёСЃРїРѕР»СЊР·СѓРµРј XML 80020
+			if (inSenderINN.value.toString()) { xmlSenderINN = inSenderINN.value.toString(); }	// РѕРїСЂРµРґРµР»СЏРµРј РРќРќ РѕС‚РїСЂР°РІРёС‚РµР»СЏ
+			if (!inSenderINN.value.toString()) { xmlSenderINN = "5036065113"; }			// РµСЃР»Рё РРќРќ РѕС‚РїСЂР°РІРёС‚РµР»СЏ РЅРµ РІС‹СЃС‚Р°РІР»РµРЅ, РёСЃРїРѕР»СЊР·СѓРµРј 5036065113
+			if (inSenderName.value.toString()) { xmlSenderName = inSenderName.value.toString(); }	// РѕРїСЂРµРґРµР»СЏРµРј РЅР°РёРјРµРЅРѕРІР°РЅРёРµ РѕС‚РїСЂР°РІРёС‚РµР»СЏ
+			if (!inSenderName.value.toString()) { xmlSenderName = "РџРђРћ Р РѕСЃСЃРµС‚Рё РњРѕСЃРєРѕРІСЃРєРёР№ СЂРµРіРёРѕРЅ"; }	// РµСЃР»Рё РЅР°РёРјРµРЅРѕРІР°РЅРёРµ РѕС‚РїСЂР°РІРёС‚РµР»СЏ РЅРµ РІС‹СЃС‚Р°РІР»РµРЅРѕ, РёСЃРїРѕР»СЊР·СѓРµРј РџРђРћ Р РѕСЃСЃРµС‚Рё РњРѕСЃРєРѕРІСЃРєРёР№ СЂРµРіРёРѕРЅ
+			if (inMessNumber.value.toString()) { xmlMessNumber = inMessNumber.value.toString(); }	// РѕРїСЂРµРґРµР»СЏРµРј РЅРѕРјРµСЂ СЃРѕРѕР±С‰РµРЅРёСЏ
+			if (!inMessNumber.value.toString()) { xmlMessNumber = "1"; }				// РµСЃР»Рё РЅРѕРјРµСЂ СЃРѕРѕР±С‰РµРЅРёСЏ РЅРµ РІС‹СЃС‚Р°РІР»РµРЅ, РёСЃРїРѕР»СЊР·СѓРµРј 1
+			let prevTime, nextTime;
+			// С„РѕСЂРјРёСЂСѓРµРј С‚РµРєСЃС‚ РґР»СЏ РІС‹РІРѕРґР°
+			let str80020 = '<?xml version="1.0" encoding="UTF-8"?>' + '\r\n' +
+				'<!--' + 'This file generated from XML converter by Denis Neryupov' + '-->' + '\r\n' +
+				'<!--' + h1.replace('<br>', '') + '-->' + '\r\n' +
+				'<!--' + h2 + '-->' + '\r\n' +
+				'<message class="80020" version="2" number="' + xmlMessNumber + '">' + '\r\n' +
+				'  <datetime>' + '\r\n' +
+				'    <timestamp>' + sDateConv(xmlDate).replace('.', '').replace('.', '') + '155405</timestamp>' + '\r\n' +
+				'    <daylightsavingtime>0</daylightsavingtime>' + '\r\n' +
+				'    <day>' + sDateConv(xmlDate).replace('.', '').replace('.', '') + '</day>' + '\r\n' +
+				'  </datetime>' + '\r\n' +
+				'  <sender>' + '\r\n' +
+				'    <name>' + xmlSenderName + '</name>' + '\r\n' +
+				'    <inn>' + xmlSenderINN + '</inn>' + '\r\n' +
+				'  </sender>' + '\r\n' +
+				'  <area timezone="1">' + '\r\n' +
+				'    <inn>' + xmlAreaINN + '</inn>' + '\r\n' +
+				'    <name>' + xmlAreaName + '</name>' + '\r\n' +
+				'    <measuringpoint code="' + xmlMeasCode + '" name="' + xmlMeasName + '">' + '\r\n';
+			str80020 = str80020 + '      <measuringchannel code="01" desc="СЃС‡РµС‚С‡РёРє, Р°РєС‚. РїСЂРёРµРј">' + '\r\n';
+			prevTime = '0000';
+			arr.forEach(function (el, i) {
+				if (el[6] === xmlDate) {
+					nextTime = el[5].replace(':', '');
+					str80020 = str80020 + '        <period start="' + prevTime + '" end="' + nextTime + '"><value>' + el[1] + '</value></period>' + '\r\n';
+					prevTime = el[5].replace(':', '');
+				};
+			});
+			str80020 = str80020 + '      </measuringchannel>' + '\r\n';
+			str80020 = str80020 + '      <measuringchannel code="02" desc="СЃС‡РµС‚С‡РёРє, Р°РєС‚. РѕС‚РґР°С‡Р°">' + '\r\n';
+			prevTime = '0000';
+			arr.forEach(function (el, i) {
+				if (el[6] === xmlDate) {
+					nextTime = el[5].replace(':', '');
+					str80020 = str80020 + '        <period start="' + prevTime + '" end="' + nextTime + '"><value>' + el[2] + '</value></period>' + '\r\n';
+					prevTime = el[5].replace(':', '');
+				};
+			});
+			str80020 = str80020 + '      </measuringchannel>' + '\r\n';
+			str80020 = str80020 + '      <measuringchannel code="03" desc="СЃС‡РµС‚С‡РёРє, СЂРµР°РєС‚. РїСЂРёРµРј">' + '\r\n';
+			prevTime = '0000';
+			arr.forEach(function (el, i) {
+				if (el[6] === xmlDate) {
+					nextTime = el[5].replace(':', '');
+					str80020 = str80020 + '        <period start="' + prevTime + '" end="' + nextTime + '"><value>' + el[3] + '</value></period>' + '\r\n';
+					prevTime = el[5].replace(':', '');
+				};
+			});
+			str80020 = str80020 + '      </measuringchannel>' + '\r\n';
+			str80020 = str80020 + '      <measuringchannel code="04" desc="СЃС‡РµС‚С‡РёРє, СЂРµР°РєС‚. РѕС‚РґР°С‡Р°">' + '\r\n';
+			prevTime = '0000';
+			arr.forEach(function (el, i) {
+				if (el[6] === xmlDate) {
+					nextTime = el[5].replace(':', '');
+					str80020 = str80020 + '        <period start="' + prevTime + '" end="' + nextTime + '"><value>' + el[4] + '</value></period>' + '\r\n';
+					prevTime = el[5].replace(':', '');
+				};
+			});
+			str80020 = str80020 + '      </measuringchannel>' + '\r\n';
+			str80020 = str80020 + '    </measuringpoint>' + '\r\n' +
 				'  </area>' + '\r\n' +
 				'</message>';
-	toTextArea(str80020, 'toTextAreaArr');
-	presentExportFile('80020_' + xmlSenderINN + '_' + sDateConv(xmlDate).replace('.','').replace('.','') + '_' + xmlMessNumber + '.xml', str80020);
-}
+			toTextArea(str80020, 'toTextAreaArr');
+			presentExportFile('80020_' + xmlSenderINN + '_' + sDateConv(xmlDate).replace('.', '').replace('.', '') + '_' + xmlMessNumber + '.xml', str80020);
+		}
 
-// запись тэгов в массив
-// использует getSubTag, getSubTagInner
-function tagToArr(s, sTag, inner) {
-	if (typeof inner == 'undefined' && !inner) {inner = false};
-	s = s.toLowerCase();
-	sTag = sTag.toLowerCase();
-	let arrOfTags = [];
-	let arrElemCount = 0;
-	let offset = 0;
-	let tagLength = 0;
-	let subTagElem;
-	while (offset >= 0 && offset <= s.length) {
-		offset = s.indexOf(sTag, offset + tagLength) - 1;
-		if (offset >=0) {
-			if (!inner) { subTagElem = getSubTag(s, sTag, offset); }
-			if (inner) { subTagElem = getSubTagInner(s, sTag, offset);}
-			tagLength = getSubTag(s, sTag, offset).length;
-			arrOfTags.push(subTagElem);			
-			arrElemCount = arrElemCount + 1;
-		};
-	};
-	return arrOfTags
-}
+		// Р·Р°РїРёСЃСЊ С‚СЌРіРѕРІ РІ РјР°СЃСЃРёРІ
+		// РёСЃРїРѕР»СЊР·СѓРµС‚ getSubTag, getSubTagInner
+		function tagToArr(s, sTag, inner) {
+			if (typeof inner == 'undefined' && !inner) { inner = false };
+			s = s.toLowerCase();
+			sTag = sTag.toLowerCase();
+			let arrOfTags = [];
+			let arrElemCount = 0;
+			let offset = 0;
+			let tagLength = 0;
+			let subTagElem;
+			while (offset >= 0 && offset <= s.length) {
+				offset = s.indexOf(sTag, offset + tagLength) - 1;
+				if (offset >= 0) {
+					if (!inner) { subTagElem = getSubTag(s, sTag, offset); }
+					if (inner) { subTagElem = getSubTagInner(s, sTag, offset); }
+					tagLength = getSubTag(s, sTag, offset).length;
+					arrOfTags.push(subTagElem);
+					arrElemCount = arrElemCount + 1;
+				};
+			};
+			return arrOfTags
+		}
 
-// запись содержимого из тэгов в массив
-// использует tagToArr
-function tagToArrInner(s, sTag) {
-	s = s.toLowerCase();
-	sTag = sTag.toLowerCase();
-	return tagToArr(s, sTag, true)
-}
+		// Р·Р°РїРёСЃСЊ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ РёР· С‚СЌРіРѕРІ РІ РјР°СЃСЃРёРІ
+		// РёСЃРїРѕР»СЊР·СѓРµС‚ tagToArr
+		function tagToArrInner(s, sTag) {
+			s = s.toLowerCase();
+			sTag = sTag.toLowerCase();
+			return tagToArr(s, sTag, true)
+		}
 
-// выбор подтекста в тексте
-// использует только нативные функции
-function getSubText(s, subsBegin, subsEnd, offset) {
-	if (typeof offset == 'undefined') {offset = 0};
-	s = s.toLowerCase();
-	subsBegin = subsBegin.toLowerCase();
-	subsEnd = subsEnd.toLowerCase();
-	let result = s.substring(s.indexOf(subsBegin, offset), s.indexOf(subsEnd, s.indexOf(subsBegin, offset)) + subsEnd.length);
-	return result
-}
+		// РІС‹Р±РѕСЂ РїРѕРґС‚РµРєСЃС‚Р° РІ С‚РµРєСЃС‚Рµ
+		// РёСЃРїРѕР»СЊР·СѓРµС‚ С‚РѕР»СЊРєРѕ РЅР°С‚РёРІРЅС‹Рµ С„СѓРЅРєС†РёРё
+		function getSubText(s, subsBegin, subsEnd, offset) {
+			if (typeof offset == 'undefined') { offset = 0 };
+			s = s.toLowerCase();
+			subsBegin = subsBegin.toLowerCase();
+			subsEnd = subsEnd.toLowerCase();
+			let result = s.substring(s.indexOf(subsBegin, offset), s.indexOf(subsEnd, s.indexOf(subsBegin, offset)) + subsEnd.length);
+			return result
+		}
 
-// выбор тэга в тексте
-// использует getSubText
-function getSubTag(s, sTag, offset, inner) {
-	s = s.toLowerCase();
-	sTag = sTag.toLowerCase();
-	if (typeof offset == 'undefined') {offset = 0};
-	if (typeof inner == 'undefined' && !inner) {inner = false};
-	let endOpenTag = s.indexOf('>', s.indexOf(sTag)) + '>'.length;
-	let openTag = '<' + s.substring(s.indexOf(sTag), endOpenTag);
-	let closeTag = '</' + sTag + '>';
-	let tagFromText;
-	if (offset >= 0) { tagFromText = getSubText(s, openTag, closeTag, offset) };
-	if (offset < 0) { return };
-	let result;
-	if (!inner) { result = tagFromText; }
-	if (inner) { result = tagFromText.substring(tagFromText.indexOf(openTag) + openTag.length, tagFromText.indexOf(closeTag)); };
-	return result
-}
+		// РІС‹Р±РѕСЂ С‚СЌРіР° РІ С‚РµРєСЃС‚Рµ
+		// РёСЃРїРѕР»СЊР·СѓРµС‚ getSubText
+		function getSubTag(s, sTag, offset, inner) {
+			s = s.toLowerCase();
+			sTag = sTag.toLowerCase();
+			if (typeof offset == 'undefined') { offset = 0 };
+			if (typeof inner == 'undefined' && !inner) { inner = false };
+			let endOpenTag = s.indexOf('>', s.indexOf(sTag)) + '>'.length;
+			let openTag = '<' + s.substring(s.indexOf(sTag), endOpenTag);
+			let closeTag = '</' + sTag + '>';
+			let tagFromText;
+			if (offset >= 0) { tagFromText = getSubText(s, openTag, closeTag, offset) };
+			if (offset < 0) { return };
+			let result;
+			if (!inner) { result = tagFromText; }
+			if (inner) { result = tagFromText.substring(tagFromText.indexOf(openTag) + openTag.length, tagFromText.indexOf(closeTag)); };
+			return result
+		}
 
-// выбор содержимого из тэга в тексте
-// использует getSubText просто дополнение
-function getSubTagInner(s, sTag, offset) {
-	s = s.toLowerCase();
-	sTag = sTag.toLowerCase();
-	if (typeof offset == 'undefined') {offset = 0};
-	return getSubTag(s, sTag, offset, true)
-}
+		// РІС‹Р±РѕСЂ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ РёР· С‚СЌРіР° РІ С‚РµРєСЃС‚Рµ
+		// РёСЃРїРѕР»СЊР·СѓРµС‚ getSubText РїСЂРѕСЃС‚Рѕ РґРѕРїРѕР»РЅРµРЅРёРµ
+		function getSubTagInner(s, sTag, offset) {
+			s = s.toLowerCase();
+			sTag = sTag.toLowerCase();
+			if (typeof offset == 'undefined') { offset = 0 };
+			return getSubTag(s, sTag, offset, true)
+		}
 
-// вывод в div на страницу
-// использует только нативные функции
-function toDiv(s, id) {
-	if (typeof id == 'undefined') {id="toDivElem"};	
-	document.body.insertAdjacentHTML('beforeend', '<div id="' + id + '" style="background-color:lightGreen"></div>');
-	let toDivElem = document.querySelector('#' + id);
-	toDivElem.innerText = s;
-}
+		// РІС‹РІРѕРґ РІ div РЅР° СЃС‚СЂР°РЅРёС†Сѓ
+		// РёСЃРїРѕР»СЊР·СѓРµС‚ С‚РѕР»СЊРєРѕ РЅР°С‚РёРІРЅС‹Рµ С„СѓРЅРєС†РёРё
+		function toDiv(s, id) {
+			if (typeof id == 'undefined') { id = "toDivElem" };
+			document.body.insertAdjacentHTML('beforeend', '<div id="' + id + '" style="background-color:lightGreen"></div>');
+			let toDivElem = document.querySelector('#' + id);
+			toDivElem.innerText = s;
+		}
 
-// вывод в textarea на страницу
-// использует только нативные функции
-function toTextArea(s, id) {
-	if (typeof id == 'undefined') {id="toTextArea"};	
-	document.body.insertAdjacentHTML('beforeend', '<textarea id="' + id + '" style="width:100%; height:100vh; margin-top:10px"></textarea>');
-	let toDivElem = document.querySelector('#' + id);
-	toDivElem.innerText = s;
-}
+		// РІС‹РІРѕРґ РІ textarea РЅР° СЃС‚СЂР°РЅРёС†Сѓ
+		// РёСЃРїРѕР»СЊР·СѓРµС‚ С‚РѕР»СЊРєРѕ РЅР°С‚РёРІРЅС‹Рµ С„СѓРЅРєС†РёРё
+		function toTextArea(s, id) {
+			if (typeof id == 'undefined') { id = "toTextArea" };
+			document.body.insertAdjacentHTML('beforeend', '<textarea id="' + id + '" style="width:100%; height:100vh; margin-top:10px"></textarea>');
+			let toDivElem = document.querySelector('#' + id);
+			toDivElem.innerText = s;
+		}
 
-// счет количества тэгов в тексте
-// использует только нативные функции
-function tagCount(s, sTag) {
-	s = s.toLowerCase();
-	sTag = sTag.toLowerCase();
-	let sTagEnd = '</' + sTag + '>';
-	let sTagCount = 0;
-	let trIndex = 0;
-	while (trIndex >= 0 && trIndex < s.length) {
-		trIndex = s.indexOf(sTagEnd, trIndex + sTagEnd.length);
-		if (trIndex > 0) { sTagCount++; }
-	};	
-	return sTagCount
-}
+		// СЃС‡РµС‚ РєРѕР»РёС‡РµСЃС‚РІР° С‚СЌРіРѕРІ РІ С‚РµРєСЃС‚Рµ
+		// РёСЃРїРѕР»СЊР·СѓРµС‚ С‚РѕР»СЊРєРѕ РЅР°С‚РёРІРЅС‹Рµ С„СѓРЅРєС†РёРё
+		function tagCount(s, sTag) {
+			s = s.toLowerCase();
+			sTag = sTag.toLowerCase();
+			let sTagEnd = '</' + sTag + '>';
+			let sTagCount = 0;
+			let trIndex = 0;
+			while (trIndex >= 0 && trIndex < s.length) {
+				trIndex = s.indexOf(sTagEnd, trIndex + sTagEnd.length);
+				if (trIndex > 0) { sTagCount++; }
+			};
+			return sTagCount
+		}
 
-// экспорт в текстовый файл
-// использует только нативные функции
-function presentExportFile(targetFilename, exportText) {
-    let download = document.createElement('a');
-    download.setAttribute('href', 'data:text/plain;charset=windows-1251,' + encodeURIComponent(exportText));
-    download.setAttribute('download', targetFilename); 
-    download.style.display = 'none';
-    document.body.appendChild(download); 
-    download.click(); 
-    document.body.removeChild(download);
-}
+		// СЌРєСЃРїРѕСЂС‚ РІ С‚РµРєСЃС‚РѕРІС‹Р№ С„Р°Р№Р»
+		// РёСЃРїРѕР»СЊР·СѓРµС‚ С‚РѕР»СЊРєРѕ РЅР°С‚РёРІРЅС‹Рµ С„СѓРЅРєС†РёРё
+		function presentExportFile(targetFilename, exportText) {
+			let download = document.createElement('a');
+			download.setAttribute('href', 'data:text/plain;charset=windows-1251,' + encodeURIComponent(exportText));
+			download.setAttribute('download', targetFilename);
+			download.style.display = 'none';
+			document.body.appendChild(download);
+			download.click();
+			document.body.removeChild(download);
+		}
 
-// конвертация строки с датой формата DD.MM.YY в формат 20YY.MM.DD
-// использует только нативные функции
-function sDateConv(sDate) {
-	let result = 20 + sDate.split('.').reverse().join('.');
-	return result
-}
+		// РєРѕРЅРІРµСЂС‚Р°С†РёСЏ СЃС‚СЂРѕРєРё СЃ РґР°С‚РѕР№ С„РѕСЂРјР°С‚Р° DD.MM.YY РІ С„РѕСЂРјР°С‚ 20YY.MM.DD
+		// РёСЃРїРѕР»СЊР·СѓРµС‚ С‚РѕР»СЊРєРѕ РЅР°С‚РёРІРЅС‹Рµ С„СѓРЅРєС†РёРё
+		function sDateConv(sDate) {
+			let result = 20 + sDate.split('.').reverse().join('.');
+			return result
+		}
 
-</script>
+	</script>
 
 </body>
+
 </html>
